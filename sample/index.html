@@ -8,10 +8,17 @@
 	<link rel="stylesheet" href="css/layout.css" type="text/css" media="all" charset="utf-8" />
 	
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../src/jquery.infieldlabel.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../src/jquery.infieldlabel.js" type="text/javascript" charset="utf-8"></script>
 	
 	<script type="text/javascript" charset="utf-8">
-		$(function(){ $("label").inFieldLabels(); });
+		$(function(){
+		  $("#name").inFieldLabels("Name");
+		  $("#email").inFieldLabels("Email");
+		  $("#website").inFieldLabels("Website");
+		  $("#comment").inFieldLabels("Comment");
+		  $("#username").inFieldLabels("Username");
+		  $("#password").inFieldLabels("Password");
+		});
 	</script>
 	<!--[if lte IE 6]>
 		<style type="text/css" media="screen">
@@ -26,37 +33,32 @@
 	<h1>In-Field Labels jQuery Plugin</h1>
 	<div id="header">
 		<p><strong>License:</strong> <a href="http://docs.jquery.com/License">Same as jQuery (Dual GPL + MIT)</a></p>
-			<p><strong>Author:</strong> <a href="http://pixelgraphics.us/company/">Doug Neiner</a></p>
-			<p><strong>Download:</strong> <a href="http://fuelyourcoding.com/scripts/infield/InFieldLabels.zip">InFieldLabels.zip</a></p>
-			<p><strong>Source:</strong> <a href="http://github.com/dcneiner/In-Field-Labels-jQuery-Plugin/">GitHub</a></p>
-			<p><strong>Size:</strong> Under 1KB Minified and gzipped</p>
-			<p><strong>Overview:</strong><br />
-			This is a simple plugin that turns properly formatted HTML forms into
-			forms with in-field label support. Labels fade when the field is focussed and disappear
-			when text entry begins. Clearing a field and leaving brings back the label.</p>
-			<p><strong>Browser Support:</strong><br />IE6+, WebKit Browsers (Safari, Chrome), Firefox 2+ <small>* IE6 requires a background-color be set on the label to match the background of the field.</small></p>
-			<p><strong>Know Issues:</strong><br />
-			Browser Auto-Complete can cause problems in hiding the labels. Less of an issue for Login Boxes, but much more of an issue with comment forms.</p>
-		</p>
+		<p><strong>Author:</strong> <a href="http://pixelgraphics.us/company/">Doug Neiner</a></p>
+		<p><strong>Download:</strong> <a href="http://fuelyourcoding.com/scripts/infield/InFieldLabels.zip">InFieldLabels.zip</a></p>
+		<p><strong>Source:</strong> <a href="http://github.com/dcneiner/In-Field-Labels-jQuery-Plugin/">GitHub</a></p>
+		<p><strong>Size:</strong> Under 1KB Minified and gzipped</p>
+		<p><strong>Overview:</strong><br />
+		This is a simple plugin that turns properly formatted HTML forms into
+		forms with in-field label support. Labels fade when the field is focussed and disappear
+		when text entry begins. Clearing a field and leaving brings back the label.</p>
+		<p><strong>Browser Support:</strong><br />IE6+, WebKit Browsers (Safari, Chrome), Firefox 2+ <small>* IE6 requires a background-color be set on the label to match the background of the field.</small></p>
+		<p><strong>Know Issues:</strong><br />
+		Browser Auto-Complete can cause problems in hiding the labels. Less of an issue for Login Boxes, but much more of an issue with comment forms.</p>
 	</div>
 	<div class="body"><h2>Samples</h2></div>
 	<form action="index.html" method="get" accept-charset="utf-8">
 		<fieldset>
 			<legend>Comment Form</legend>
 			<p>
-				<label for="name">Name</label><br />
 				<input type="text" name="name" value="" id="name">
 			</p>
 			<p>
-				<label for="email">Email</label><br />
 				<input type="text" name="email" value="" id="email">
 			</p>
 			<p>
-				<label for="website">Website</label><br />
 				<input type="text" name="website" value="" id="website">
 			</p>
 			<p>
-				<label for="comment">Comment</label><br />
 				<textarea cols="30" rows="10" name="comment" id="comment"></textarea>
 			</p>
 		</fieldset>
@@ -67,11 +69,9 @@
 		<fieldset>
 			<legend>Login Form</legend>
 			<p>
-				<label for="username">Username</label><br />
 				<input type="text" name="username" value="" id="username">
 			</p>
 			<p>
-				<label for="password">Password</label><br />
 				<input type="password" name="password" value="" id="password">
 			</p>
 		</fieldset>
@@ -79,39 +79,35 @@
 	</form>
 	<div class="body">
 		<h2>Use</h2>
-		<p><strong>HTML</strong>:
-			<pre>
-&lt;p&gt;
-  &lt;label for=&quot;field_id&quot;&gt;Label Text&lt;/label&gt;&lt;br /&gt;
-  &lt;input type=&quot;text&quot; name=&quot;field_id&quot; value=&quot;&quot;
-	id=&quot;field_id&quot;&gt;
-&lt;/p&gt;</pre>
-		</p>
+		<p><strong>HTML</strong>:<br/>
+		  All you need is an input element.</p>
+  		<pre>
+  &lt;input type=&quot;text&quot; name=&quot;some_field&quot;&gt;</pre>
+    <br/>
 		<p><strong>CSS</strong>:<br />
-			More CSS is needed to position the label nicely over the input or text area element, but since it all depends on how you have styled those elements, only the bare-bones are listed here. Keep in mind any block element can surround the label and input field. <strong>&lt;p&gt;</strong> is used as an example.
-		<pre>
-form p { position:relative }
-label  { position:absolute; top:0; left:0}</pre>	
+			The overlaying labels will be appended inside the end of the body tag, so make sure they have the correct style applied.  All you need to do is
+			set the same text style that the input elements themselves have.  Normally something like this:
 		</p>
-		<p><strong>Javascript</strong>:<br />
+		<pre>  label.infieldlabel {
+    font-size: 11px;
+    font-weight: normal;
+  }</pre>	
+		<br/><p><strong>Javascript</strong>:<br /></p>
 		<pre>
-$(document).ready(function(){
-  $("label").inFieldLabels();
-});</pre>	
-			
-		</p>
+  $(function(){
+    $(":text[name='some_field']").
+      inFieldLabels("Some Field Label Text!");
+  });</pre>	
+    <br/>
 		<h2>Options</h2>
-		<p>Two options can be passed along with the method or set ahead of time for all inFieldLabel controls.</p>
-		<p>To set them ahead of time, use the following syntax:
-			<pre>
-$.inFieldLabels.defaultOptions.optionName = "";</pre>
-		</p>
-		<p>To pass them at call time, use the following syntax:
-			<pre>
-$("label").inFieldLabels({ optionName:value });</pre>
-			</p>
+		<p>Three options can be passed along with the method or set ahead of time for all inFieldLabel controls.</p>
+		<p>To set them ahead of time, use the following syntax:</p>
+		<br/><pre>  $.inFieldLabels.defaultOptions.optionName = "";</pre>
+		<p>To pass them at call time, use the following syntax:</p>
+		<br/><pre>  $("label").inFieldLabels({ optionName:value });</pre>
 		<p><tt>fadeOpacity:</tt> <strong>Value between 0.1 and 1.0.</strong><br />When a field is focussed, its label is animated to this opacity. Defaults to 0.5</p>
-		<p><tt>fadeDuration:</tt> <strong>Time in milliseconds</strong><br />When an animation occurs, it uses this setting to determine duration. Defaults to 300</p>
+		<p><tt>fadeDuration:</tt> <strong>Time in milliseconds.</strong><br />When an animation occurs, it uses this setting to determine duration. Defaults to 300</p>
+		<p><tt>text:</tt> <strong>Label text.</strong><br />You can pass in the label text as an option if you need to set other options at the same time, otherwise the string by itself will work fine.</p>
 		<h2>Changelog</h2>
 		<p><strong>Version 0.1</strong></p>
 		<ul>

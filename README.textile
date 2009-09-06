@@ -2,9 +2,17 @@ h1. In-Field Labels jQuery Plugin
 
 *License:* "Same as jQuery (Dual GPL + MIT)":http://docs.jquery.com/License
 
-*Author:* "Doug Neiner":http://pixelgraphics.us/company
+*Fork By:* "Paul Elliott":http://blog.codingfrontier.com
+
+*Original Author:* "Doug Neiner":http://pixelgraphics.us/company
 
 *Size:* Under 1KB Minified and gzipped
+
+h2. Differences from Master
+
+I loved this plugin, but as I started to roll it out on my site I quickly found that having to set up the label, input, and container a certain way with certain css was complicating some of my existing screen designs.  I modified the plugin to instead act on the input itself, so instead of selecting the labels and attaching them to the inputs, you can select the input(s) and specify the text to be applied.
+
+It will automatically position the label it creates for you over the input element, no matter where in the DOM it is or how it is positioned.  It also calculates the margin, border, and padding of the input and sets its own padding attribute to match so that the text will correctly line up over the input's text.  All you need to do is make sure the text styling of "label.infieldlabel" is correct in your stylesheet.
 
 h2. Overview
 
@@ -26,27 +34,37 @@ h3. HTML
 
 <pre>
 <p>
-  <label for="field_id">Label Text</label><br />
-  <input type="text" name="field_id" value="" id="field_id">
+  <input type="text" name="email" value="" id="email">
 </p>
-</pre>
-
-h3. CSS
-
-More CSS is needed to position the label nicely over the input or text area element, but since it all depends on how you have styled those elements, only the bare-bones are listed here. Keep in mind any block element can surround the label and input field. <code>&lt;p&gt;</code> is used as an example.
-
-<pre>
-form p { position:relative }
-label  { position:absolute; top:0; left:0}
 </pre>
 
 h3. Javascript
 
 <pre>
-$(document).ready(function(){
-  $("label").inFieldLabels();
+$(function(){
+  $("#email").inFieldLabels("email");
 });
 </pre>
+
+h2. API
+
+You can call the plugin in one of four ways, depending on what you are asking it to do.
+
+To get a handle to the label on a particular input:
+
+<pre>$(":input").inFieldLabels("get");</pre>
+
+To remove the label from a particular input:
+
+<pre>$(":input").inFieldLabels("remove");</pre>
+
+To create a label on an input with specified text:
+
+<pre>$(":input").inFieldLabels("your label text");</pre>
+OR
+<pre>$(":input").inFieldLabels({ text: "your label text"});</pre>
+
+Note that if you wanted to apply "get" or "remove" as the text, then you would need to use the options syntax and pass in an object.
 
 h2. Options
 
