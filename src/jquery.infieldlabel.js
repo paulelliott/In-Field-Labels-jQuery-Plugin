@@ -154,7 +154,6 @@
 
         //Calculate the offset and padding for the label based on that of the input.
         var offset = $input.offset();
-        console.log($input.outerHeight(true) + "~" + $input.innerHeight());
         $label.css({
           'z-index': 99999,
           top: offset.top + "px",
