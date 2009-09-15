@@ -13,7 +13,7 @@
  * Uses the same license as jQuery, see:
  * http://docs.jquery.com/License
  *
- * @version 0.1
+ * @version 0.2
  */
 (function($){
   $.InFieldLabels = function(label,field, options){
@@ -111,7 +111,8 @@
 
   $.InFieldLabels.defaultOptions = {
     fadeOpacity: 0.5, // Once a field has focus, how transparent should the label be
-		fadeDuration: 300 // How long should it take to animate from 1.0 opacity to the fadeOpacity
+		fadeDuration: 300, // How long should it take to animate from 1.0 opacity to the fadeOpacity
+		padding: true //set the padding attribute for the label tag. true will auto calculate, false will leave it off, or any padding value will be applied
   };
 
   $.fn.inFieldLabels = function(options){
@@ -133,7 +134,7 @@
       //Merges the default options into the passed in options.
       if (!options) options = {};
       else if (typeof options === 'string') options = { text : options };
-      options = $.extend({}, options, $.InFieldLabels.defaultOptions);
+      options = $.extend({}, $.InFieldLabels.defaultOptions, options);
       
       //Applies the labels to the selected input fields.
       return this.each(function(){
@@ -154,13 +155,16 @@
 
         //Calculate the offset and padding for the label based on that of the input.
         var offset = $input.offset();
+        if (options.padding === true) {
+          options.padding = (($input.outerHeight() - $input.height()) / 2) + "px " +
+            ((($input.outerWidth() - $input.width()) / 2)) + "px";
+        }
         $label.css({
           'z-index': 99999,
           top: offset.top + "px",
-          left: offset.left + "px",
-          padding: (($input.outerHeight(true) - $input.innerHeight()) / 2) + "px " +
-            ((($input.outerWidth(true) - $input.innerWidth()) / 2)) + "px"
+          left: offset.left + "px"
         });
+        if (options.padding) $label.css('padding', options.padding);
 
     		// Only create object for input[text], input[password], or textarea
         (new $.InFieldLabels($label[0], this, options));

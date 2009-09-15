@@ -30,5 +30,31 @@ Screw.Unit(function() {
         expect($("#test_abs_pos").inFieldLabels('get').offset()).to(equal, $("#test_abs_pos").offset());
       });
     });
+
+    describe("when the padding option is overridden with false", function() {
+      before(function() {
+        $("#basic_test").inFieldLabels({
+          text: "test_padding_override",
+          padding: false
+        });
+      });
+      
+      it("it should not have a padding style", function() {
+        expect($("#basic_test").inFieldLabels('get').css('padding')).to(equal, '');
+      });
+    });
+
+    describe("when the padding option is overridden with a value", function() {
+      before(function() {
+        $("#basic_test").inFieldLabels({
+          text: "test_padding_override",
+          padding: '2px'
+        });
+      });
+      
+      it("it should not have the specified padding style", function() {
+        expect($("#basic_test").inFieldLabels('get').css('padding')).to(equal, '2px');
+      });
+    });
   });
 });

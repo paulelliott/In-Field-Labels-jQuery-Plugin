@@ -78,9 +78,11 @@ To pass them at call time, use the following syntax:
 
 <pre>$("label").inFieldLabels({ optionName:value });</pre>
 
-*<code>fadeOpacity:</code> Value between 0.1 and 1.0.*
+*<code>fadeOpacity:</code> Value between 0.1 and 1.0*
 When a field is focussed, its label is animated to this opacity. Defaults to 0.5
 
 *<code>fadeDuration:</code> Time in milliseconds*
 When an animation occurs, it uses this setting to determine duration. Defaults to 300
 
+*<code>padding:</code> Custom padding to add to the hovered label*
+This is set just like a normal css padding attribute.  Alternatively, you can set this to false and specify it in the css via label.infieldlabel. Defaults to true, which will cause the plugin to attempt to calculate this automatically.
