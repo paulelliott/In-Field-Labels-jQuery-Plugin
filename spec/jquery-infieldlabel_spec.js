@@ -31,11 +31,10 @@ Screw.Unit(function() {
       });
     });
 
-    describe("when the padding option is overridden with false", function() {
+    describe("when options.calculatePadding is set to false", function() {
       before(function() {
         $("#basic_test").inFieldLabels({
-          text: "test_padding_override",
-          padding: false
+          text: "test_padding_override"
         });
       });
       
@@ -44,16 +43,29 @@ Screw.Unit(function() {
       });
     });
 
-    describe("when the padding option is overridden with a value", function() {
+    describe("when options.calculatePadding is set to true", function() {
       before(function() {
         $("#basic_test").inFieldLabels({
           text: "test_padding_override",
-          padding: '2px'
+          calculatePadding: true
         });
       });
       
-      it("it should not have the specified padding style", function() {
-        expect($("#basic_test").inFieldLabels('get').css('padding')).to(equal, '2px');
+      it("it should have a padding style", function() {
+        expect(!$("#basic_test").inFieldLabels('get').css('padding')).to(equal, '');
+      });
+    });
+
+    describe("when options.labelClass is specified", function() {
+      before(function() {
+	$("#basic_test").inFieldLabels({
+	  text: "test label class",
+	  labelClass: "some_crazy_class"
+	});
+      });
+
+      it("it should have the specified class", function() {
+	expect($("#basic_test").inFieldLabels('get').hasClass('some_crazy_class')).to(equal, true);
       });
     });
   });
